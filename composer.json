@@ -9,6 +9,7 @@
             "email": "d00ker@icloud.com"
         }
     ],
+    "prefer-stable": true,
     "require": {
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.0"
