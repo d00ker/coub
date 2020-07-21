@@ -1,0 +1,29 @@
+{
+    "name": "d00ker/coub",
+    "description": "PHP library for working with Coub API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Igor",
+            "email": "d00ker@icloud.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Coub\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Coub\\Tests\\": "tests/"
+        }
+    }
+}
