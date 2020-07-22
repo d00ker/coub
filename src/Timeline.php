@@ -16,7 +16,7 @@ class Timeline extends Coub {
      */
     public function getHot($params = []) {
         return $this->getResponse(
-            $this->getRequest('GET', $this->getUrl($this->entity, 'hot', $params))
+            $this->doRequest('GET', $this->getUrl($this->entity, 'hot', $params))
         );
     }
 
@@ -28,7 +28,7 @@ class Timeline extends Coub {
      */
     public function getExplore($category_id = '', $params = []) {
         return $this->getResponse(
-            $this->getRequest('GET', $this->getUrl($this->entity, 'explore/' . $category_id, $params))
+            $this->doRequest('GET', $this->getUrl($this->entity, 'explore/' . $category_id, $params))
         );
     }
 }
