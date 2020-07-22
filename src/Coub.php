@@ -7,9 +7,14 @@ use GuzzleHttp;
 
 class Coub {
     /**
-     * @var string $url Coub API URL v2.
+     * @var string $domain A domain of Coub website
      */
-    protected $url = 'https://coub.com/api/v2/';
+    public $domain = 'https://coub.com';
+
+    /**
+     * @var string $uriAPI Coub API URI v2.
+     */
+    protected $uriAPI = '/api/v2/';
 
     /**
      * Coub constructor.
@@ -25,7 +30,7 @@ class Coub {
      * @return string A fully formed URL for API method.
      */
     public function getUrl($entity, $action, $params) {
-        return $this->url . $entity . '/' . $action . '?' . http_build_query($params);
+        return $this->domain . $this->uriAPI . $entity . '/' . $action . '?' . http_build_query($params);
     }
 
     /**
