@@ -34,7 +34,7 @@ class Coub {
      * @return object \Psr\Http\Message\ResponseInterface An object of result.
      * @throws GuzzleHttp\Exception\GuzzleException
      */
-    public function getRequest($method, $url) {
+    public function doRequest($method, $url) {
         return $this->http->request($method, $url);
     }
 
@@ -43,13 +43,7 @@ class Coub {
      * @return array A result.
      */
     public function getResponse($request) {
-        return [
-            'status_code' => $request->getStatusCode(),
-            'headers' => [
-                'content_type' => $request->getHeaderLine('Content-Type')
-            ],
-            'body' => json_decode($request->getBody())
-        ];
+        return json_decode($request->getBody());
     }
 
     /**
