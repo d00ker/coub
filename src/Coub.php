@@ -38,10 +38,11 @@ class Coub {
      * @param string $service A service of API.
      * @param string $action An action of entity.
      * @param array $params An array of parameters.
+     * @param bool $uriAPI If API URI is needed.
      * @return string A fully formed URL for API method.
      */
-    public function getUrl($service, $action, $params) {
-        return self::$domain . $this->uriAPI . $service . '/' . $action . '?' . http_build_query($params);
+    public function getUrl($service, $action, $params, $uriAPI = true) {
+        return self::$domain . (($uriAPI) ? $this->uriAPI : '/') . $service . '/' . $action . '?' . http_build_query($params);
     }
 
     /**
