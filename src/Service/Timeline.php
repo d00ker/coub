@@ -5,11 +5,14 @@ namespace Coub\Service;
 
 use GuzzleHttp\Exception\GuzzleException;
 
-class Timeline extends AbstractService {
+class Timeline extends AbstractService implements ServiceInterface {
     /**
-     * @var string $entity An entity of API.
+     * @throws \ReflectionException
+     * @return string A service name of API.
      */
-    protected string $entity = 'timeline';
+    public function getServiceName(): string {
+        return $this->decamelize((new \ReflectionClass($this))->getShortName());
+    }
 
     /**
      * @param array $params An array of parameters.
@@ -18,7 +21,7 @@ class Timeline extends AbstractService {
      */
     public function getHot($params = []) {
         return $this->getClient()->getResponse(
-            $this->getClient()->doRequest('GET', $this->getClient()->getUrl($this->entity, 'hot', $params))
+            $this->getClient()->doRequest('GET', $this->getClient()->getUrl($this->getServiceName(), 'hot', $params))
         );
     }
 
@@ -30,7 +33,7 @@ class Timeline extends AbstractService {
      */
     public function getExplore($category_id = '', $params = []) {
         return $this->getClient()->getResponse(
-            $this->getClient()->doRequest('GET', $this->getClient()->getUrl($this->entity, 'explore/' . $category_id,$params))
+            $this->getClient()->doRequest('GET', $this->getClient()->getUrl($this->getServiceName(), 'explore/' . $category_id,$params))
         );
     }
 }
