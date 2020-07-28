@@ -9,6 +9,7 @@ class CoreServiceFactory extends AbstractServiceFactory {
      * @var array $classMap An array of services classes
      */
     private static array $classMap = [
+        'oauth' => Oauth::class,
         'timeline' => Timeline::class
     ];
 
