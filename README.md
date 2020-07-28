@@ -1,1 +1,1 @@
-#PHP library for working with Coub API
+# PHP library for working with Coub API
