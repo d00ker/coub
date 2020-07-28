@@ -1,18 +1,20 @@
 <?php
 
 
-namespace Coub;
+namespace Coub\Service;
 
-class Timeline extends Coub {
+use GuzzleHttp\Exception\GuzzleException;
+
+class Timeline extends AbstractService {
     /**
      * @var string $entity An entity of API.
      */
-    protected $entity = 'timeline';
+    protected string $entity = 'timeline';
 
     /**
      * @param array $params An array of parameters.
      * @return array Returns coubs which are most popular by now.
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function getHot($params = []) {
         return $this->getResponse(
@@ -24,7 +26,7 @@ class Timeline extends Coub {
      * @param string $category_id One of categories IDs: random, newest, coub_of_the_day.
      * @param array $params An array of parameters.
      * @return array Returns coubs which are presented in the Explore section.
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function getExplore($category_id = '', $params = []) {
         return $this->getResponse(
