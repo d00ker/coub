@@ -41,7 +41,7 @@ class Coub {
      * @param bool $uriAPI If API URI is needed.
      * @return string A fully formed URL for API method.
      */
-    public function getUrl($service, $action, $params, $uriAPI = true) {
+    public function getUrl($service, $action, $params = [], $uriAPI = true) {
         return self::$domain . (($uriAPI) ? $this->uriAPI : '/') . $service . '/' . $action . '?' . http_build_query($params);
     }
 
