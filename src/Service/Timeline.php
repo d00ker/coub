@@ -17,8 +17,8 @@ class Timeline extends AbstractService {
      * @throws GuzzleException
      */
     public function getHot($params = []) {
-        return $this->getResponse(
-            $this->doRequest('GET', $this->getUrl($this->entity, 'hot', $params))
+        return $this->getClient()->getResponse(
+            $this->getClient()->doRequest('GET', $this->getClient()->getUrl($this->entity, 'hot', $params))
         );
     }
 
@@ -29,8 +29,8 @@ class Timeline extends AbstractService {
      * @throws GuzzleException
      */
     public function getExplore($category_id = '', $params = []) {
-        return $this->getResponse(
-            $this->doRequest('GET', $this->getUrl($this->entity, 'explore/' . $category_id, $params))
+        return $this->getClient()->getResponse(
+            $this->getClient()->doRequest('GET', $this->getClient()->getUrl($this->entity, 'explore/' . $category_id,$params))
         );
     }
 }
