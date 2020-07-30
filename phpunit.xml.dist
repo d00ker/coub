@@ -2,7 +2,13 @@
 <phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Timeline">
-            <directory>./tests/Coub/Timeline</directory>
+            <directory>./tests/Coub/Service/Timeline</directory>
+        </testsuite>
+        <testsuite name="Coubs">
+            <directory>./tests/Coub/Service/Coubs</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="access_token" value="you_access_token"/>
+    </php>
 </phpunit>
