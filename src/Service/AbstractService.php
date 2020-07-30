@@ -32,4 +32,12 @@ abstract class AbstractService {
     public function decamelize(string $string) {
         return strtolower(preg_replace(['/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $string));
     }
+
+    /**
+     * @return string A service name of API.
+     * @throws \ReflectionException
+     */
+    public function getServiceName() {
+        return $this->decamelize((new \ReflectionClass($this))->getShortName());
+    }
 }
