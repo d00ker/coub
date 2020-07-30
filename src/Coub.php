@@ -28,39 +28,68 @@ class Coub {
     private $coreServiceFactory;
 
     /**
-     * AbstractService constructor.
+     * @var string $accessToken An access token.
+     * It should be added to every API request as the access_token parameter of the URL.
      */
-    public function __construct() {
-        $this->http = new GuzzleHttp\Client();
+    private $accessToken;
+
+    /**
+     * @return string
+     */
+    public function getAccessToken(): string {
+        return $this->accessToken;
+    }
+
+    /**
+     * @param string $accessToken
+     */
+    public function setAccessToken(string $accessToken): void {
+        $this->accessToken = $accessToken;
+    }
+
+    /**
+     * AbstractService constructor.
+     * @param string $accessToken
+     */
+    public function __construct($accessToken = '') {
+        if ($accessToken) {
+            $this->setAccessToken($accessToken);
+        }
+        $this->http = new GuzzleHttp\Client([
+            'base_uri' => self::$domain . $this->uriAPI
+        ]);
     }
 
     /**
      * @param string $service A service of API.
      * @param string $action An action of entity.
-     * @param array $params An array of parameters.
      * @param bool $uriAPI If API URI is needed.
-     * @return string A fully formed URL for API method.
+     * @return string A fully formed URI for API method.
      */
-    public function getUrl($service, $action, $params = [], $uriAPI = true) {
-        return self::$domain . (($uriAPI) ? $this->uriAPI : '/') . $service . '/' . $action . '?' . http_build_query($params);
+    public function getUri($service, $action, $uriAPI = true) {
+        return (($uriAPI) ? '' : '/') . $service . '/' . $action;
     }
 
     /**
      * @param string $method One of REST methods, like GET, POST, etc.
-     * @param string $url An resource URL.
+     * @param string $service A service of API.
+     * @param string $action An action of entity.
+     * @param array $params An array of parameters.
+     * @param bool $uriAPI If API URI is needed.
      * @return object \Psr\Http\Message\ResponseInterface An object of result.
      * @throws GuzzleHttp\Exception\GuzzleException
      */
-    public function doRequest($method, $url) {
-        return $this->http->request($method, $url);
-    }
-
-    /**
-     * @param object $request An object of request.
-     * @return array A result.
-     */
-    public function getResponse($request) {
-        return json_decode($request->getBody());
+    public function sendRequest($method, $service, $action, $params = [], $uriAPI = true) {
+        if ($service !== 'oauth') {
+            $params['access_token'] = $this->getAccessToken();
+        }
+        return json_decode(
+            $this->http->request(
+                $method,
+                $this->getUri($service, $action, $uriAPI),
+                ['query' => $params]
+            )->getBody()
+        );
     }
 
     /**
