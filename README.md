@@ -17,7 +17,7 @@ composer require d00ker/coub
 
 Simple usage looks like:
 ```php
-$Coub = new Coub();
+$Coub = new Coub($token);
 $hotCoubs = $Coub->timeline->getHot();
 ```
 
